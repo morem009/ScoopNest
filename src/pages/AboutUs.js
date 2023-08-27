@@ -4,10 +4,10 @@ function AboutUs() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <section className="bg-[#F28B82] text-white py-20">
+      <section className="bg-[#F28B82] text-white py-8 md:py-20">
         <div className="container mx-auto text-center">
-          <h1 className="text-5xl font-bold mb-4">About ScoopNest</h1>
-          <p className="text-xl">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">About ScoopNest</h1>
+          <p className="text-lg md:text-xl">
             Discover our story, from the origins to our latest initiatives.
           </p>
         </div>

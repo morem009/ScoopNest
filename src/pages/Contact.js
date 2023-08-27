@@ -3,11 +3,10 @@ import React from 'react';
 function Contact() {
   return (
     <div className="flex flex-col min-h-screen">
-
-      {/* Hero Section */}
-      <section className="bg-[#F28B82] text-white py-20">
-        <div className="container mx-auto text-center">
-          <h1 className="text-5xl font-bold mb-4">Contact Us</h1>
+    {/* Hero Section */}
+    <section className="bg-[#F28B82] text-white py-8 md:py-20">
+      <div className="container mx-auto text-center">
+        <h1 className="text-4xl md:text-5xl font-bold mb-4">Contact Us</h1>
           <p className="text-xl">
             Got a question? We're here to help and answer any question you might have.
           </p>

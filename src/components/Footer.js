@@ -1,5 +1,5 @@
 import React from "react";
-import { FaLinkedin, FaFacebookF, FaTwitter } from "react-icons/fa";
+import { FaLinkedin, FaFacebookF, FaTwitter, FaInstagram } from "react-icons/fa";  // <-- Import FaInstagram
 import { Link, useNavigate } from "react-router-dom";
 
 function Footer() {
@@ -64,15 +64,15 @@ function Footer() {
       </ul>
     </div>
 
-          {/* Contacts */}
-          <div>
+         {/* Contacts */}
+         <div>
             <h3 className="text-lg font-semibold mb-2">Get In Touch</h3>
             <ul className="space-y-2">
               <li>Address: Five Gardens, Matunga East, Mumbai</li>
-              <li>Phone: 022 287 67890</li>
+              <li>Tel: 022 287 67890</li>
+              <li>Email: support@scoopnest.com</li> {/* <-- Added email */}
             </ul>
           </div>
-
           {/* Opening Hours */}
           <div>
             <h3 className="text-lg font-semibold mb-2">Opening Hours</h3>
@@ -101,6 +101,14 @@ function Footer() {
               rel="noreferrer"
             >
               <FaFacebookF />
+            </a>
+            <a
+              href="https://www.instagram.com/"  
+              className="w-6 h-6 text-xl hover:text-gray-400 transition-colors"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <FaInstagram />  {/* <-- Instagram icon */}
             </a>
             <a
               href="https://www.linkedin.com/"
