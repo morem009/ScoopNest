@@ -1,0 +1,16 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+/* Custom Navbar styles using @apply */
+.nav-link {
+    @apply hover:text-gray-300 transition duration-200;
+  }
+  
+  .nav-link-active {
+    @apply bg-blue-500 px-2 py-1 rounded;
+  }
+  
+  .nav-logo-hover {
+    @apply h-8 hover:h-10 transition duration-200;
+  }
+  
