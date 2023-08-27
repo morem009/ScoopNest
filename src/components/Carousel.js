@@ -73,7 +73,7 @@ function Carousel() {
     setActiveSlide((prevSlide) => (prevSlide - 1 + 2) % 2);
   };
   return (
-    <div className="relative  w-full overflow-hidden">
+    <div className="relative w-full overflow-hidden">
       <div className="rounded shadow relative h-auto md:h-96 lg:h-112 transition-all duration-300">
         <div
           className="flex transition-transform duration-500 ease-in-out"
@@ -82,27 +82,27 @@ function Carousel() {
             width: "200%",
           }}
         >
-          <div className="w-1/2 h-full relative hover:opacity-90 transition-opacity duration-300">
+          <div className="w-1/2 h-80 md:h-96 lg:h-112 relative hover:opacity-90 transition-opacity duration-300">
             <img
               src={carouselImage1}
               alt="Ice Cream 1"
-              className="w-full object-cover h-full md:h-96 lg:h-112"
+              className="w-full object-cover h-80 md:h-96 lg:h-112"
             />
-            <div className="absolute inset-0 flex flex-col justify-center items-center p-2 md:p-4 bg-black bg-opacity-50">
+            <div className="absolute inset-0 flex flex-col justify-center items-center p-1 md:p-4 bg-black bg-opacity-50">
               <h2 className="text-xl md:text-3xl font-bold text-white mb-2">
                 {texts1.header}
               </h2>
               <p className="text-lg md:text-xl text-white">{texts1.subtext}</p>
             </div>
           </div>
-
-          <div className="w-1/2 h-full relative hover:opacity-90 transition-opacity duration-300">
+  
+          <div className="w-1/2 h-80 md:h-96 lg:h-112 relative hover:opacity-90 transition-opacity duration-300">
             <img
               src={carouselImage2}
               alt="Ice Cream 2"
-              className="w-full object-cover h-full md:h-96 lg:h-112"
+              className="w-full object-cover h-80 md:h-96 lg:h-112"
             />
-            <div className="absolute inset-0 flex flex-col justify-center items-center p-2 md:p-4 bg-black bg-opacity-50">
+            <div className="absolute inset-0 flex flex-col justify-center items-center p-1 md:p-4 bg-black bg-opacity-50">
               <h2 className="text-xl md:text-3xl font-bold text-white mb-2">
                 {texts2.header}
               </h2>

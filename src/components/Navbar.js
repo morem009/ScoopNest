@@ -10,7 +10,6 @@ function Navbar() {
             {/* Desktop Navbar */}
             <nav className="bg-[#292e37] shadow-lg p-4 hidden md:flex justify-between items-center fixed top-0 w-full z-50 transition-all duration-300">
                 <Link to="/"><img src={logo} alt="ScoopNest Logo" className="h-12 transform hover:scale-110 transition-transform duration-300" /></Link>
-
                 <div className="space-x-6">
                     <Link to="/" className="text-white hover:text-gray-400 transform hover:scale-105 transition-transform duration-300">Home</Link>
                     <Link to="/products" className="text-white hover:text-gray-400 transform hover:scale-105 transition-transform duration-300">Products</Link>
@@ -24,12 +23,12 @@ function Navbar() {
                 </div>
             </nav>
 
-            {/* Mobile Navbar */}
-            <nav className="bg-[#292e37] shadow-lg p-4 md:hidden flex justify-between items-center fixed top-0 w-full z-50 transition-all duration-300">
+             {/* Mobile Navbar */}
+             <nav className="bg-[#292e37] shadow-lg p-2 md:hidden flex justify-between items-center fixed top-0 w-full z-50 transition-all duration-300">
                 <button onClick={() => setIsOpen(!isOpen)} className="text-white focus:outline-none">
                     ☰
                 </button>
-                <Link to="/"><img src={logo} alt="ScoopNest Logo" className="h-12 transform hover:scale-110 transition-transform duration-300" /></Link>
+                <Link to="/"><img src={logo} alt="ScoopNest Logo" className="h-10 transform hover:scale-110 transition-transform duration-300" /></Link>
             </nav>
 
             {/* Mobile Slide-In Menu */}
