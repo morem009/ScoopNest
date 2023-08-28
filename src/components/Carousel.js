@@ -73,7 +73,7 @@ function Carousel() {
     setActiveSlide((prevSlide) => (prevSlide - 1 + 2) % 2);
   };
   return (
-    <div className="relative w-full overflow-hidden">
+    <div className="relative w-full overflow-hidden mb-0">
       <div className="rounded shadow relative h-auto md:h-96 lg:h-112 transition-all duration-300">
         <div
           className="flex transition-transform duration-500 ease-in-out"
