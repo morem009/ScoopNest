@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 // import { getAnalytics } from "firebase/analytics";
 import { initializeApp } from 'firebase/app';
+// eslint-disable-next-line
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 
 import { getDatabase } from 'firebase/database';
