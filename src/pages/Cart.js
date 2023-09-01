@@ -39,7 +39,6 @@ function Cart() {
   const proceedToCheckout = async () => {
     console.log("Attempting to proceed to checkout...");
 
-    // Check if the cart is empty and show a toast notification if it is
     if (Object.keys(cartData).length === 0) {
       toast.warn('Your cart is empty!');
       return;

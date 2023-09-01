@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { getDatabase, ref, get } from "firebase/database";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
+import FeedbackComponent from "../components/Feedback";
 
 function Orders() {
   const auth = getAuth();
@@ -38,7 +39,6 @@ function Orders() {
     };
   }, [auth, db]);
 
-  // Filter orders based on selected filter
   const filteredOrders = () => {
     const currentDate = new Date();
     const lastMonth = new Date();
@@ -60,7 +60,6 @@ function Orders() {
     }
   };
 
-  // Helper function to filter orders by date range
   const filterOrdersByDate = (startDate, endDate) => {
     const filtered = {};
     for (const orderId in orders) {
@@ -85,8 +84,6 @@ function Orders() {
     <div>
       <div className="container mx-auto mt-10">
         <h2 className="text-3xl font-bold mb-6 text-center">Your Orders</h2>
-
-        {/* Filter options */}
         <div className="mb-4 text-center">
           <label className="mr-2">Filter by:</label>
           <select
@@ -109,8 +106,8 @@ function Orders() {
               <div key={orderKey} className="bg-white shadow-md rounded p-4">
                 <h3 className="text-lg font-semibold">Order ID: {orderKey}</h3>
                 <ul className="mt-2">
-                  {Object.values(orderItems).map((productDetails, index) => (
-                    <li key={index} className="mb-2">
+                  {Object.entries(orderItems).map(([productKey, productDetails]) => (
+                    <li key={productKey} className="mb-2">
                       <div className="flex items-center">
                         <img
                           src={productDetails.image}
@@ -119,7 +116,13 @@ function Orders() {
                         />
                         {productDetails.name} - Quantity: {productDetails.count}
                       </div>
-                      <p>Purchase Date: {new Date(productDetails.purchaseDate).toLocaleString()}</p>
+                      <p>
+                        Purchase Date: {new Date(productDetails.purchaseDate).toLocaleString()}
+                      </p>
+                      <FeedbackComponent
+                        orderKey={orderKey}
+                        productId={productKey}
+                      />
                     </li>
                   ))}
                 </ul>
