@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
+import { toast } from 'react-toastify';  
+import 'react-toastify/dist/ReactToastify.css'; 
 
 function LoginPage() {
     const [email, setEmail] = useState("");
@@ -19,14 +21,16 @@ function LoginPage() {
         if (Object.keys(newErrors).length === 0) {
             try {
                 await signInWithEmailAndPassword(auth, email, password);
-                console.log("User logged in successfully");
+                toast.success("User logged in successfully");
                 window.scrollTo(0, 0);
                 navigate('/');  // Navigate to home page after successful login
             } catch (error) {
                 if (error.code === "auth/user-not-found" || error.code === "auth/wrong-password") {
                     newErrors.general = "Invalid email or password.";
+                    toast.error("Invalid email or password.");
                 } else {
                     newErrors.general = error.message;
+                    toast.error(error.message);
                 }
                 console.error("Error logging in: ", error.message);
             }

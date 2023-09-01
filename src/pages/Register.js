@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
+import { getDatabase, ref, set } from "firebase/database";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const auth = getAuth();
 
@@ -10,7 +13,6 @@ function RegisterPage() {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [errors, setErrors] = useState({});
-    const [successMessage, setSuccessMessage] = useState("");
     const navigate = useNavigate();
 
     const handleRegister = async () => {
@@ -27,16 +29,23 @@ function RegisterPage() {
         if (Object.keys(newErrors).length > 0) return;
 
         try {
-            await createUserWithEmailAndPassword(auth, email, password);
-            setSuccessMessage("User registered successfully!");
-
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            const db = getDatabase();
+            const userRef = ref(db, `users/${userCredential.user.uid}`);
+            set(userRef, {
+                name: name,
+                address: "None" // initializing address to "None"
+            });
+            toast.success("User registered successfully!");
+    
             setTimeout(() => {
                 navigate('/login');
             }, 2000);
         } catch (error) {
             if (error.code === 'auth/email-already-in-use') {
-                setErrors({ ...errors, general: 'This email is already in use. Please try another one.' });
+                toast.error('This email is already in use. Please try another one.');  // <- Use toast here
             } else {
+                toast.error(error.message);  // <- Use toast here
                 console.error("Error registering user: ", error.message);
             }
         }
@@ -106,14 +115,6 @@ function RegisterPage() {
                 </div>
             </main>
 
-            {successMessage && (
-                <div className="fixed inset-x-0 bottom-0 mb-4 z-50 flex items-center justify-center">
-                    <div className="bg-green-500 text-white p-4 rounded-lg shadow-md animate-fade-in-up">
-                        <h2 className="font-bold">{successMessage}</h2>
-                        <p>Redirecting to login...</p>
-                    </div>
-                </div>
-            )}
         </div>
     );
 }
