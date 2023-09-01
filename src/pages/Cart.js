@@ -218,7 +218,7 @@ function Cart() {
       <div className="flex justify-center mt-4">
         <p className="font-semibold">Grand Total: {grandTotal}</p>
       </div>
-      <button onClick={proceedToCheckout} className="bg-[#F28B82] text-white p-4 rounded mt-4 block mx-auto">
+      <button onClick={proceedToCheckout} className="bg-[#F28B82] text-white p-4 rounded mt-4 block mx-auto hover:bg-[#f16255]">
     Proceed to Checkout
 </button>
     </div>

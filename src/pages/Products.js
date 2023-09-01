@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
-  FaInstagram,
+  FaTelegram,
   FaFacebookF,
   FaWhatsapp,
   FaCartPlus,
@@ -31,9 +31,14 @@ function Products() {
   // eslint-disable-next-line 
   const userCart = useSelector(selectCartProducts);
   const dispatch = useDispatch();
+  const currentURL = window.location.href;
+  const socialMediaLinks = {
+    whatsapp: `https://wa.me/?text=${encodeURIComponent(currentURL)}`,
+    facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentURL)}`,
+    telegram: `https://telegram.me/share/url?url=${encodeURIComponent(window.location.href)}&text=Check%20out%20this%20awesome%20product!`,
+  }
 
   useEffect(() => {
-    // Handle user's authentication and fetch cart data
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setIsAuthenticated(true);
@@ -147,7 +152,6 @@ function Products() {
         }
       });
 
-      // Clear suggested products and search term
       setSuggestedProducts([]);
       setSearchTerm("");
     }
@@ -241,15 +245,15 @@ function Products() {
 
                 <div className="flex justify-center space-x-4">
                   <a
-                    href={product.instagram}
+                    href={socialMediaLinks.telegram}
                     target="_blank"
                     rel="noreferrer"
                     className="text-[#F28B82] hover:text-[#F0696A]"
                   >
-                    <FaInstagram size={24} />
+                    <FaTelegram size={24} />
                   </a>
                   <a
-                    href={product.facebook}
+                    href={socialMediaLinks.facebook}
                     target="_blank"
                     rel="noreferrer"
                     className="text-[#1877F2] hover:text-[#0b5ed7]"
@@ -257,7 +261,7 @@ function Products() {
                     <FaFacebookF size={24} />
                   </a>
                   <a
-                    href={product.whatsapp}
+                    href={socialMediaLinks.whatsapp}
                     target="_blank"
                     rel="noreferrer"
                     className="text-[#25D366] hover:text-[#128C7E]"

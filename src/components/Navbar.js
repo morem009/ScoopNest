@@ -222,19 +222,23 @@ function Navbar() {
           {!loading && isUserLoggedIn && (
             <>
               <li className="flex items-center space-x-3">
-                <Link
-                  to="/cart"
-                  className="text-black hover:text-gray-400"
-                  onClick={closeMenu}
-                >
-                  <div className="relative">
-                    <FaShoppingCart className="text-black h-6 w-6" />
-                    <span className="absolute top-0 right-0 bg-black text-white text-xs rounded-full w-5 h-5 flex items-center justify-center transform translate-x-[50%] translate-y-[-50%]">
-                      {cartCount}
-                    </span>
-                  </div>
-                  Cart
-                </Link>
+              <Link
+    to="/cart"
+    className="text-black hover:text-gray-400"
+    onClick={closeMenu}
+>
+    <div className="flex items-center">
+        <div className="relative">
+            <FaShoppingCart className="text-black h-6 w-6" />
+            <span className="absolute top-0 right-0 bg-black text-white text-xs rounded-full w-5 h-5 flex items-center justify-center transform translate-x-[50%] translate-y-[-50%]">
+                {cartCount}
+            </span>
+        </div>
+        <span className="ml-4">Cart</span>
+    </div>
+</Link>
+
+
               </li>
 
               <li className="flex items-center space-x-3 justify-between">
@@ -255,14 +259,14 @@ function Navbar() {
                 <div className="ml-6">
                   <li>
                     <Link
-                      to="/userprofile"
+                      to="/account"
                       className="text-black hover:text-gray-400"
                       onClick={() => {
                         setMobileUserDropdown(false); // Close the mobile user dropdown
                         closeMenu(); // Close the mobile menu
                       }}
                     >
-                     Your Profile
+                       Your Profile
                     </Link>
                   </li>
                   <li>

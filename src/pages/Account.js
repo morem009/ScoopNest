@@ -87,65 +87,65 @@ function Account() {
   };
 
   return (
-    <div className="container mx-auto mt-10 p-4 flex justify-center">
-      <div className="w-1/2 bg-white shadow-lg rounded-lg p-8">
+    <div className="container mx-auto mt-10 p-4">
+      <div className="w-full md:w-3/4 lg:w-1/2 mx-auto bg-white shadow-lg rounded-lg p-8">
         <h2 className="text-4xl font-bold mb-6 text-center">Profile</h2>
 
         <div className="mb-4 border-b-2 border-gray-200 pb-4">
           <h3 className="text-xl font-medium mb-2">User Details</h3>
-          <div className="flex justify-between items-center mb-3">
-            <p className="text-lg">
-              <strong>Email:</strong> <span className="ml-7"> {user?.email} </span>
+          <div className="flex flex-col md:flex-row justify-between items-start mb-3">
+            <p className="text-lg mb-3 md:mb-0">
+              <strong>Email:</strong> <span className="ml-3"> {user?.email} </span>
             </p>
           </div>
 
-          <div className="flex justify-between items-center mb-3">
-            <p className="text-lg">
-              <strong>Name:</strong>
-              {editingField === "name" ? (
-                <input
-                  className="ml-3 border rounded py-1 px-2"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
-              ) : (
-                <span className="ml-7"> {name} </span>
-              )}
-            </p>
-            <button
-              onClick={() => setEditingField("name")}
-              className="text-blue-600"
-            >
-              ✏️
-            </button>
-          </div>
+          <div className="flex items-center justify-between mb-3">
+    <p className="text-lg">
+        <strong>Name:</strong>
+        {editingField === "name" ? (
+            <input
+                className="ml-3 border rounded py-1 px-2 focus:border-blue-500"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+            />
+        ) : (
+            <span className="ml-3"> {name} </span>
+        )}
+    </p>
+    <button
+        onClick={() => setEditingField("name")}
+        className="text-blue-600"
+    >
+        ✏️
+    </button>
+</div>
 
-          <div className="flex justify-between items-center mb-3">
-            <p className="text-lg">
-              <strong>Address:</strong>
-              {editingField === "address" ? (
-                <input
-                  className="ml-3 border rounded py-1 px-2"
-                  value={address}
-                  onChange={(e) => setAddress(e.target.value)}
-                />
-              ) : (
-                <span className="ml-3"> {address} </span>
-              )}
-            </p>
-            <button
-              onClick={() => setEditingField("address")}
-              className="text-blue-600"
-            >
-              ✏️
-            </button>
-          </div>
+<div className="flex items-center justify-between mb-3">
+    <p className="text-lg">
+        <strong>Address:</strong>
+        {editingField === "address" ? (
+            <input
+                className="ml-3 border rounded py-1 px-2 focus:border-blue-500"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+            />
+        ) : (
+            <span className="ml-3"> {address} </span>
+        )}
+    </p>
+    <button
+        onClick={() => setEditingField("address")}
+        className="text-blue-600"
+    >
+        ✏️
+    </button>
+</div>
+
 
           <p className="text-lg">
-            <strong>Order Count:</strong>  <span className="ml-3">{orderCount}</span>
-            <Link to="/orders" className=" text-lg ml-3 text-F28B82 hover:underline">View Orders</Link>
+            <strong>Order Count:</strong> <span className="ml-3">{orderCount}</span>
+            <Link to="/orders" className="text-lg ml-3 text-F28B82 hover:underline">View Orders</Link>
           </p>
-         
         </div>
         {editingField && (
           <div className="text-center mt-4">
@@ -194,14 +194,13 @@ function Account() {
 
               <button
                 onClick={handleChangePassword}
-                style={{ backgroundColor: "#F28B82" }}
-                className="text-white font-bold w-full py-2 px-4 rounded text-base transition-all duration-300 hover:bg-F0696A mt-2"
-              >
+                className="bg-[#F28B82] text-white p-4 rounded mt-4 block mx-auto hover:bg-[#f16255]"
+                 >
                 Update Password
               </button>
 
               {errors.general && (
-                <p className="text-red-500 text-sm mt-2">{errors.general}</p>
+                <p className="text-red-500 text-sm mt-2 ">{errors.general}</p>
               )}
             </div>
           )}

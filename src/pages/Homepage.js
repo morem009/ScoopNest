@@ -1,40 +1,43 @@
 import React, { useState } from "react";
 import promotionImage from "../assets/promotion.jpg";
-import { FaInstagram, FaFacebookF, FaWhatsapp, FaStar, FaRegStar } from 'react-icons/fa';
-import VanillaImage from '../assets/Vanilla.png';
-import ChocolateImage from '../assets/Chocolate.png';
-import StrawberryImage from '../assets/Strawberry.png';
+import { FaTelegram, FaFacebookF, FaWhatsapp, FaStar, FaRegStar } from 'react-icons/fa';
+
 
 function Homepage() {
   const [playVideo, setPlayVideo] = useState(false);
-
+  const currentURL = window.location.href;
+  const socialMediaLinks = {
+    whatsapp: `https://wa.me/?text=${encodeURIComponent(currentURL)}`,
+    facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentURL)}`,
+    telegram: `https://telegram.me/share/url?url=${encodeURIComponent(window.location.href)}&text=Check%20out%20this%20awesome%20product!`,
+  }
   const products = [
     { 
       id: 1, 
       name: "Vanilla Delight", 
-      imgSrc: VanillaImage, 
+      imgSrc: "https://media.istockphoto.com/id/522386716/photo/scoop-of-vanilla-ice-cream-isolated-on-white-background.webp?b=1&s=170667a&w=0&k=20&c=qmayTJQvywngUmDn36XLDsvcEKQuNpL25Tb9mcwdWVE=", 
       rating: 4,
-      instagram: "https://www.instagram.com/",
-      facebook: "https://www.facebook.com/",
-      whatsapp: "https://www.whatsapp.com/"
+      telegram: socialMediaLinks.telegram,
+      facebook: socialMediaLinks.facebook,
+      whatsapp: socialMediaLinks.whatsapp
     },
     {
       id: 2, 
-      name: "Chocolate Fantasy", 
-      imgSrc: ChocolateImage, 
+      name: "ChocoScoop", 
+      imgSrc: "https://media.istockphoto.com/id/486976605/photo/chocolate-ice-cream.jpg?s=612x612&w=0&k=20&c=eHJlcVuWHfqZhWS6Sd9LOULZDnBo-VQFox-Q_PO7Oyo=", 
       rating: 4.5,
-      instagram: "https://www.instagram.com/",
-      facebook: "https://www.facebook.com/",
-      whatsapp: "https://www.whatsapp.com/"
+      telegram: socialMediaLinks.telegram,
+      facebook: socialMediaLinks.facebook,
+      whatsapp: socialMediaLinks.whatsapp
     },
     {
       id: 3, 
       name: "Strawberry Bliss", 
-      imgSrc: StrawberryImage, 
+      imgSrc: "https://media.istockphoto.com/id/175000914/photo/scoop-of-strawberry-ice-cream-isolated-on-white.jpg?s=612x612&w=0&k=20&c=DRRkFdJ_1w-HXnoCuT2npVEGvQe4MZcKoNasiAeD2-E=", 
       rating: 4.8,
-      instagram: "https://www.instagram.com/",
-      facebook: "https://www.facebook.com/",
-      whatsapp: "https://www.whatsapp.com/"
+      telegram: socialMediaLinks.telegram,
+      facebook: socialMediaLinks.facebook,
+      whatsapp: socialMediaLinks.whatsapp
     }
   ];
 
@@ -65,8 +68,8 @@ function Homepage() {
                 ))}
               </div>
               <div className="flex justify-center space-x-4">
-                <a href={product.instagram} target="_blank" rel="noreferrer" className="text-[#F28B82] hover:text-[#F0696A]">
-                  <FaInstagram size={24} />
+                <a href={product.telegram} target="_blank" rel="noreferrer" className="text-[#F28B82] hover:text-[#F0696A]">
+                  <FaTelegram size={24} />
                 </a>
                 <a href={product.facebook} target="_blank" rel="noreferrer" className="text-[#1877F2] hover:text-[#0b5ed7]">
                   <FaFacebookF size={24} />
