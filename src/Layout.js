@@ -8,7 +8,7 @@ const Layout = ({ children }) => {
         <div>
             <Navbar />
             <Carousel />
-            {children} {/* This is where your routed components (like Homepage, Login) will be rendered */}
+            {children} 
             <Footer />
         </div>
     );

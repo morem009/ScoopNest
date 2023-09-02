@@ -121,7 +121,7 @@ function Footer() {
           </div>
           <div className="text-center">
             <p className="text-sm">
-              &copy; 2023 ScoopNest. Designed with ❤️ by Mandy
+              &copy; 2023 ScoopNest
             </p>
           </div>
         </div>

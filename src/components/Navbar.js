@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import logo from "../assets/Logo.png";
+import logo from "../assets/Logo.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
 import {
@@ -52,7 +52,7 @@ function Navbar() {
   return (
     <div>
       {/* Desktop Navbar */}
-      <nav className="bg-[#292e37] shadow-lg p-4 hidden md:flex justify-between items-center fixed top-0 w-full z-50 transition-all duration-300">
+      <nav className="bg-[#131921] shadow-lg p-4 hidden md:flex justify-between items-center fixed top-0 w-full z-50 transition-all duration-300">
         <Link to="/">
           <img
             src={logo}
@@ -145,7 +145,7 @@ function Navbar() {
               </Link>
               <Link
                 to="/login"
-                className="text-white hover:text-gray-400 transform hover:scale-105 transition-transform duration-300"
+                className="text-white hover:text-gray-400 transform hover:scale-105 transition-transform duration-300 pr-2"
               >
                 Login
               </Link>
@@ -155,7 +155,7 @@ function Navbar() {
       </nav>
 
       {/* Mobile Navbar */}
-      <nav className="bg-[#292e37] shadow-lg p-4 md:hidden flex justify-between items-center fixed top-0 w-full z-50 transition-all duration-300">
+      <nav className="bg-[#131921] shadow-lg p-4 md:hidden flex justify-between items-center fixed top-0 w-full z-50 transition-all duration-300">
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="text-white text-2xl focus:outline-none"

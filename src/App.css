@@ -14,3 +14,50 @@
 .App-content {
   padding: 0;
 }
+
+.mascot {
+  width: 100px;
+  height: 100px;
+  background-color: #EFEFEF;
+  border-radius: 50%;
+  position: relative;
+  margin: 0 auto 20px;
+}
+
+.eye {
+  width: 15px;
+  height: 15px;
+  background-color: #000;
+  border-radius: 50%;
+  position: absolute;
+  top: 30%;
+}
+
+.eye.left {
+  left: 30%;
+}
+
+.eye.right {
+  right: 30%;
+}
+
+.hand {
+  width: 30px;
+  height: 15px;
+  background-color: #EFEFEF;
+  border-radius: 50%;
+  position: absolute;
+  top: 40%;
+  z-index: 1;
+  transform: rotate(20deg);
+}
+
+.hand.left {
+  left: 10%;
+  transform: rotate(-20deg);
+}
+
+.hand.right {
+  right: 10%;
+}
+
