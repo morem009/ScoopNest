@@ -64,6 +64,7 @@ function Cart() {
     return () => {
       unsubscribe();
     };
+    // eslint-disable-next-line
   }, [auth, db]);
 
   useEffect(() => {
