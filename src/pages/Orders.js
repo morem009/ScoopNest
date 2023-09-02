@@ -106,25 +106,31 @@ function Orders() {
               <div key={orderKey} className="bg-white shadow-md rounded p-4">
                 <h3 className="text-lg font-semibold">Order ID: {orderKey}</h3>
                 <ul className="mt-2">
-                  {Object.entries(orderItems).map(([productKey, productDetails]) => (
-                    <li key={productKey} className="mb-2">
-                      <div className="flex items-center">
-                        <img
-                          src={productDetails.image}
-                          alt={productDetails.name}
-                          className="w-12 h-12 mr-2"
+                  {Object.entries(orderItems).map(
+                    ([productKey, productDetails]) => (
+                      <li key={productKey} className="mb-2">
+                        <div className="flex items-center">
+                          <img
+                            src={productDetails.image}
+                            alt={productDetails.name}
+                            className="w-12 h-12 mr-2"
+                          />
+                          {productDetails.name} - Quantity:{" "}
+                          {productDetails.count}
+                        </div>
+                        <p>
+                          Purchase Date:{" "}
+                          {new Date(
+                            productDetails.purchaseDate
+                          ).toLocaleString()}
+                        </p>
+                        <FeedbackComponent
+                          orderKey={orderKey}
+                          productId={productKey}
                         />
-                        {productDetails.name} - Quantity: {productDetails.count}
-                      </div>
-                      <p>
-                        Purchase Date: {new Date(productDetails.purchaseDate).toLocaleString()}
-                      </p>
-                      <FeedbackComponent
-                        orderKey={orderKey}
-                        productId={productKey}
-                      />
-                    </li>
-                  ))}
+                      </li>
+                    )
+                  )}
                 </ul>
               </div>
             ))}

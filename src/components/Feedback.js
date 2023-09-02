@@ -1,49 +1,75 @@
-import React, { useState, useEffect } from 'react';
-import { ref, set, get, getDatabase } from 'firebase/database';
-import { getAuth } from 'firebase/auth';
-import { FaStar, FaRegStar, FaPencilAlt } from 'react-icons/fa';
-import { toast } from 'react-toastify';
+import React, { useState, useEffect } from "react";
+import { ref, set, get, push, getDatabase } from "firebase/database";
+import { getAuth } from "firebase/auth";
+import { toast } from "react-toastify";
+import { FaStar, FaRegStar, FaPencilAlt } from "react-icons/fa";
 
 function FeedbackComponent({ orderKey, productId }) {
   const auth = getAuth();
   const db = getDatabase();
   const [rating, setRating] = useState(0);
-  const [review, setReview] = useState('');
+  const [review, setReview] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [editMode, setEditMode] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  console.log(productId)
 
   useEffect(() => {
     const fetchFeedback = async () => {
-      const feedbackRef = ref(db, `users/${auth.currentUser.uid}/orders/${orderKey}/${productId}/feedback`);
-      const snapshot = await get(feedbackRef);
+        const feedbackRef = ref(db, `users/${auth.currentUser.uid}/orders/${orderKey}/${productId}/feedback`);
+        const snapshot = await get(feedbackRef);
 
-      if (snapshot.exists()) {
-        setRating(snapshot.val().rating);
-        setReview(snapshot.val().review);
-        setSubmitted(true);
-      }
+        if (snapshot.exists()) {
+            setRating(snapshot.val().rating);
+            setReview(snapshot.val().review);
+            setSubmitted(true);
+        }
     };
 
     fetchFeedback();
-  }, [auth, db, orderKey, productId]);
+}, [auth, db, orderKey, productId]);
 
-  const handleFeedbackSubmit = async () => {
-    const feedbackRef = ref(db, `users/${auth.currentUser.uid}/orders/${orderKey}/${productId}/feedback`);
-    await set(feedbackRef, {
-      rating: rating,
-      review: review,
-    });
-    toast.success('Thank you for your feedback!');
-    setSubmitted(true);
-    setEditMode(false);
-  };
+const handleFeedbackSubmit = async () => {
+  setIsLoading(true);
+  try {
+      // Save feedback under the user's order
+      const feedbackUserRef = ref(
+          db,
+          `users/${auth.currentUser.uid}/orders/${orderKey}/${productId}/feedback`
+      );
+      await set(feedbackUserRef, { rating, review });
+
+      // Push feedback to the product's feedback section
+      const feedbackProductListRef = ref(db, `products/${productId}/feedback`);
+      await push(feedbackProductListRef, {
+          userId: auth.currentUser.uid,  // store userId as well, in case you want to attribute feedback
+          rating,
+          review,
+          orderId: orderKey
+      });
+
+      toast.success("Thank you for your feedback!");
+      setSubmitted(true);
+      setEditMode(false);
+      setIsLoading(false);
+
+  } catch (error) {
+      toast.error("An error occurred. Please try again.");
+      console.error("Error submitting feedback:", error);
+      setIsLoading(false);
+  }
+};
+
 
   return (
     <div className="border p-4 rounded mt-2 bg-gray-100">
       <h4 className="text-lg font-semibold mb-2 flex justify-between">
-        Leave a Feedback 
+        Leave a Feedback
         {submitted && !editMode && (
-          <FaPencilAlt onClick={() => setEditMode(true)} className="text-[#F28B82] cursor-pointer" />
+          <FaPencilAlt
+            onClick={() => setEditMode(true)}
+            className="text-[#F28B82] cursor-pointer"
+          />
         )}
       </h4>
       {!submitted || editMode ? (
@@ -71,11 +97,12 @@ function FeedbackComponent({ orderKey, productId }) {
             rows={4}
           />
           <button
-            onClick={handleFeedbackSubmit}
-            className="bg-[#F28B82] text-white p-2 rounded"
-          >
-            Submit Feedback
-          </button>
+    onClick={handleFeedbackSubmit}
+    className="bg-[#F28B82] text-white p-2 rounded"
+    disabled={isLoading} // assuming you add an isLoading state when saving
+>
+    Submit Feedback
+</button>
         </>
       ) : (
         <>

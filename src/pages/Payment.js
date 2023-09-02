@@ -21,44 +21,46 @@ const PaymentForm = () => {
   const dispatch = useDispatch();
 
   const handlePayment = async () => {
-  const result = await stripe.createToken(elements.getElement(CardElement));
+    const result = await stripe.createToken(elements.getElement(CardElement));
 
-  if (result.error) {
-    console.error(result.error.message);
-    toast.success("Error occured, Your order has not been confirmed.")
-    setErrorMessage(result.error.message);
-  } else {
-    setErrorMessage("");
-    toast.success("Your order has been confirmed.")
+    if (result.error) {
+        console.error(result.error.message);
+        toast.error("Error occurred. Your order has not been confirmed.");
+        setErrorMessage(result.error.message);
+    } else {
+        setErrorMessage("");
+        toast.success("Your order has been confirmed.");
 
-    const userUid = auth.currentUser.uid;
-    const db = getDatabase();
-    const cartRef = ref(db, `users/${userUid}/cart`);
-    const ordersRef = ref(db, `users/${userUid}/orders`);
-    const purchaseDate = new Date().toISOString(); // Get purchase date
+        const userUid = auth.currentUser.uid;
+        const db = getDatabase();
+        const cartRef = ref(db, `users/${userUid}/cart`);
+        const ordersRef = ref(db, `users/${userUid}/orders`);
+        const purchaseDate = new Date().toISOString(); // Get purchase date
 
-    get(cartRef).then((snapshot) => {
-      const cartItems = snapshot.val();
-      if (cartItems) {
-        const orderItems = Object.entries(cartItems).map(([productName, productDetails]) => ({
-          ...productDetails,
-          name: productName,
-          purchaseDate,
-          image: productDetails.image, // Store product image URL
-        }));
+        get(cartRef).then((snapshot) => {
+            const cartItems = snapshot.val();
+            if (cartItems) {
+                const orderItems = {};
+                Object.entries(cartItems).forEach(([productID, productDetails]) => {
+                    orderItems[productID] = {
+                        ...productDetails,
+                        purchaseDate,
+                    };
+                });
 
-        const newOrderRef = push(ordersRef);
-        set(newOrderRef, orderItems); // Store order items with images and purchase date
-        remove(cartRef);
-        dispatch(resetCart());
+                const newOrderRef = push(ordersRef);
+                set(newOrderRef, orderItems);
+                remove(cartRef);
+                dispatch(resetCart());
 
-        setTimeout(() => {
-          navigate("/orders");
-        }, 2000);
-      }
-    });
-  }
+                setTimeout(() => {
+                    navigate("/orders");
+                }, 2000);
+            }
+        });
+    }
 };
+
   return (
     <div>
       <h2 className="text-2xl font-semibold mb-4">Payment Information</h2>
